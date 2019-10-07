@@ -1,2 +1,152 @@
-Powerball shit
-Jimmys Hot Dogs
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Assignment 4</title>
+	
+	<style>
+		body{
+			background-color: #C76163;
+		}
+		h1{
+			font-size: 50pt;
+			text-align: center;
+		}
+		h2{
+			font-size: 30pt;
+			text-align: center;
+		}
+		
+		h3{
+			text-align: center;
+			color: #FFFFFF;
+			font-size: 30pt;
+		}
+	
+	
+	</style>
+</head>
+
+<body>
+	<script language="javascript"> 
+		// Create random numbers
+		var nums_winning = [Math.floor(Math.random() * 48) + 1, 
+					 Math.floor(Math.random() * 48) + 1,
+					 Math.floor(Math.random() * 48) + 1,
+					 Math.floor(Math.random() * 48) + 1,
+					 Math.floor(Math.random() * 48) + 1,
+					];
+		
+		var LB_winning = Math.floor(Math.random() * 18) + 1;
+		
+		// Print out sorted and nonsorted numbers
+		var i;
+		document.write("Winning numbers unsorted:  ");
+		for (i = 0; i < nums_winning.length; i++) {
+			document.write(nums_winning[i] + " ")
+		}
+		document.write(" <br />")
+
+        nums_winning.sort(function(a, b){return a - b});
+		document.write("Winning numbers sorted:  ");
+		for (i = 0; i < nums_winning.length; i++) {
+			document.write(nums_winning[i] + " ")		
+		}
+		
+	</script>
+	<h1> Lucky for Life! </h1>
+	<h2> Enter your 5 regular guesses:
+	<input id="5guess"> <br />
+	Enter your Lucky Ball guess:
+	<input id="LBguess"
+	<br />
+	<br />
+	<button type="button" onclick="run()"> Submit </button>
+	 </h2>
+	<script language="javascript">
+	
+		function run(){
+			// Define initial variable and array
+			var LB_guessed;
+			var nums_guessed = [1, 2, 3, 4, 5];
+	
+			// Read in guessed values
+			LB_guessed = document.getElementById("LBguess").value;
+			nums_guessed = document.getElementById("5guess").value.split(" ");
+			
+	//		document.getElementById("response2").innerHTML = nums_guessed[3];
+			
+			// Calculate payout
+			var payout = "$0";
+			var num_match = 0;
+			var LB_match = false;
+			
+			// Check number matched
+			var i;
+			var j;
+			for(i = 0; i < nums_winning.length; i++){
+				num_to_check = nums_winning[i];
+				
+				for(j = 0; j < nums_guessed.length; j++){
+					if(num_to_check == nums_guessed[j]){
+						num_match++;		
+					}
+				}
+				
+			}
+			LB_match = Boolean(LB_guessed == LB_winning);
+			
+			// Calculate total payout
+			if(num_match == 0){
+				if(LB_match == true){
+					payout = "$4";
+				}
+			}
+			if(num_match == 1){
+				if(LB_match == true){
+					payout = "$6";
+				}
+			}
+			
+			if(num_match == 2){
+				if(LB_match == true){
+					payout = "$25";
+				} else {
+					payout = "$3";
+				}
+			}
+			
+			if(num_match == 3){
+				if(LB_match == true){
+					payout = "$150";
+				} else {
+					payout = "$20";
+				}
+			}
+			
+			if(num_match == 4){
+				if(LB_match == true){
+					payout = "$5000";
+				} else {
+					payout = "$200";
+				}
+			}
+			
+			if(num_match == 5){
+				if(LB_match == true){
+					payout = "$7,000 a WEEK for LIFE!";
+				} else {
+					payout = "$25,000 a YEAR for LIFE!";
+				}
+			}
+			
+			document.getElementById("response1").innerHTML = "Total Payout: " + payout;
+	}
+	
+	</script>
+	
+	<h3 id="response1"></h3>
+	
+	
+</body>
+</html>
